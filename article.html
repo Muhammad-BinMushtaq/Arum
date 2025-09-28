@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Art of Digital Storytelling - Aurum Magazine</title>
+    <style>
+        :root {
+            --font-size-sm: clamp(0.875rem, 0.5vw + 0.7rem, 1rem);
+            --font-size-base: clamp(1rem, 1vw + 0.8rem, 1.125rem);
+            --font-size-lg: clamp(1.125rem, 1.2vw + 0.9rem, 1.25rem);
+            --font-size-2xl: clamp(1.5rem, 2vw + 1rem, 2rem);
+            --font-size-3xl: clamp(2rem, 3vw + 1.2rem, 3rem);
+            --font-size-4xl: clamp(2.5rem, 4vw + 1.5rem, 4rem);
+
+            --color-primary: #d4af37;
+            --color-primary-dark: #b8941f;
+            --color-text: #333;
+            --color-text-light: #666;
+            --color-background: #fff;
+            --color-border: #e1e5e9;
+
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-background);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 var(--space-md);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .logo {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--color-text);
+            font-weight: 500;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        /* ===== HAMBURGER ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--color-text);
+        }
+
+        /* ===== ARTICLE HEADER ===== */
+        .article-header {
+            text-align: center;
+            padding: var(--space-xl) var(--space-md);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+        }
+
+        .article-header h1 {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--space-sm);
+        }
+
+        .article-subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* ===== ARTICLE BODY ===== */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .article-body {
+            text-align: justify;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .article-body img {
+            max-width: 100%;
+            margin: var(--space-md) auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== SIDEBAR ===== */
+
+        /* Sidebar container */
+        .sidebar {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            max-width: 280px;
+            height: fit-content;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        /* Section heading */
+        .sidebar-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            padding-left: 10px;
+            color: #333;
+        }
+
+        /* Related article list */
+        .related-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .related-list li {
+            margin: 10px 0;
+        }
+
+        .related-list a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1rem;
+            color: #444;
+            background: #f9f9f9;
+            padding: 10px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .related-list a:hover {
+            background: #667eea;
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        /* Small icons */
+        .related-list .icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+
+        /* ===== TAGS ===== */
+        .article-tags {
+            margin: var(--space-xl) 0;
+            padding: var(--space-md) 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            font-size: var(--font-size-sm);
+            color: var(--color-primary-dark);
+        }
+
+        /* ===== AUTHOR BIO ===== */
+        .author-bio {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+            background: #f8f9fa;
+            padding: var(--space-md);
+            border-radius: 10px;
+            margin: var(--space-xl) 0;
+        }
+
+        .author-avatar img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .pull-quote {
+            font-style: italic;
+            border-left: 4px solid var(--color-primary);
+            padding-left: var(--space-md);
+            margin: var(--space-lg) 0;
+            color: var(--color-text-light);
+            background: #f9f9f9;
+            padding: var(--space-md);
+        }
+
+        /* ===== FOOTER NAV ===== */
+        .article-nav {
+            border-top: 1px solid var(--color-border);
+            margin-top: var(--space-xl);
+            padding-top: var(--space-md);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-item {
+            list-style: none;
+            flex: 1;
+            padding: var(--space-md);
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background: #eee;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--color-primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .author-bio {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .author-avatar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .author-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-bio p {
+            max-width: 600px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .author-socials {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .author-socials a svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+            transition: transform 0.3s, fill 0.3s;
+        }
+
+        .author-socials a:hover svg {
+            transform: scale(1.3);
+            fill: #ffd700;
+        }
+
+
+
+
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                background: white;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                padding: var(--space-md);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+
+
+            .article-nav {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+
+
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">Aurum</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" href="/">Home</a></li>
+                <li><a class="nav-link" href="#">Articles</a></li>
+                <li><a class="nav-link" href="#">About</a></li>
+                <li><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="document.querySelector('.nav-menu').classList.toggle('active')">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ARTICLE HEADER -->
+    <section class="article-header">
+        <h1>The Art of Digital Storytelling in Modern Media</h1>
+        <p class="article-subtitle">How digital platforms reshape the way we share stories and connect with audiences.
+        </p>
+    </section>
+
+
+    <!-- ARTICLE LAYOUT -->
+    <main class="container article-layout">
+        <article>
+            <div class="article-body">
+                <img src="/images/image.webp" alt="">
+                <h2>The Evolution of Storytelling</h2>
+                <p>
+                    Storytelling has always been at the heart of human culture. From ancient cave paintings to oral
+                    traditions
+                    passed down through generations, stories have served as a powerful tool for sharing knowledge,
+                    values, and
+                    experiences. They allow us to make sense of the world, connect with one another, and preserve
+                    history in ways
+                    that transcend time and geography.
+                </p>
+
+                <p>
+                    In the digital age, the landscape of storytelling has expanded far beyond the limitations of
+                    traditional
+                    mediums. Today, narratives are no longer confined to books, plays, or films. Instead, they take on
+                    new forms
+                    across podcasts, blogs, video essays, streaming platforms, and even interactive experiences like
+                    games and
+                    virtual reality. This shift has transformed not only how stories are told but also how they are
+                    consumed and
+                    remembered.
+                </p>
+
+                <blockquote class="pull-quote">
+                    “Storytelling in the digital era is about building worlds and inviting audiences to explore them.”
+                </blockquote>
+
+                <h2>Digital Platforms as Storytelling Tools</h2>
+                <p>
+                    Platforms such as YouTube, Spotify, TikTok, and independent publishing sites have become creative
+                    playgrounds
+                    for storytellers. Podcasts bring intimate conversations and investigative narratives directly to our
+                    ears, while
+                    video essays combine visuals, audio, and commentary to create thought-provoking analyses. Meanwhile,
+                    interactive
+                    fiction and role-playing games allow audiences to step into a story, making decisions that shape the
+                    outcome.
+                </p>
+
+                <p>
+                    This flexibility empowers creators to experiment with form and style, blending traditional elements
+                    with modern
+                    technology. It also challenges audiences to think critically, reflect emotionally, and sometimes
+                    even
+                    participate actively in the unfolding of a narrative.
+                </p>
+
+                <blockquote class="pull-quote">
+                    “The audience is no longer just a passive listener—they are collaborators in the story.”
+                </blockquote>
+
+                <h2>The Future of Narrative</h2>
+                <p>
+                    Looking ahead, the future of storytelling seems boundless. Emerging technologies such as virtual
+                    reality (VR),
+                    augmented reality (AR), and artificial intelligence (AI) are paving the way for fully immersive
+                    experiences
+                    where stories feel alive. Imagine walking through a digitally constructed city where every corner
+                    holds a piece
+                    of a narrative, or interacting with AI-driven characters who respond uniquely to each conversation.
+                </p>
+
+                <p>
+                    While technology opens exciting possibilities, the essence of storytelling remains unchanged: the
+                    ability to
+                    connect, inspire, and move people. Whether told around a campfire or through a holographic display,
+                    stories will
+                    always remind us of our shared humanity.
+                </p>
+            </div>
+
+            <div class="article-tags">
+                <div class="tag-list">
+                    <span class="tag">Storytelling</span>
+                    <span class="tag">Digital Media</span>
+                    <span class="tag">Creativity</span>
+                    <span class="tag">Future</span>
+                    <span class="tag">Culture</span>
+                </div>
+            </div>
+
+            <div class="author-bio " id="author-bio">
+                <div class="author-avatar">
+                    <img src="/images/Muhammad.png" alt="Author">
+                </div>
+                <div>
+                    <h3>Muhammad</h3>
+                    <p class="author-title">Student, Writer & Software Developer</p>
+                    <p>
+                        Muhammad is a BSSE student with a strong interest in technology, coding, and creative writing.
+                        He enjoys exploring how digital media and software shape the way people interact, learn, and
+                        share ideas.
+                        Beyond academics, he spends time writing stories, working on his novel, and experimenting with
+                        new coding projects.
+                        His passion lies in blending creativity with technology to build meaningful experiences and
+                        inspire others.
+                    </p>
+                </div>
+                <div class="author-socials">
+                    <a href="https://github.com/Muhammad-BinMushtaq/" target="_blank" aria-label="GitHub">
+                        <!-- GitHub SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#333" viewBox="0 0 24 24">
+                            <path
+                                d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.87-1.54-3.87-1.54-.52-1.3-1.27-1.65-1.27-1.65-1.04-.7.08-.68.08-.68 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.3 1.18-3.12-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.19a10.9 10.9 0 0 1 5.74 0c2.19-1.5 3.15-1.19 3.15-1.19.62 1.58.23 2.75.11 3.04.74.82 1.18 1.86 1.18 3.12 0 4.43-2.68 5.4-5.23 5.69.42.37.78 1.1.78 2.22 0 1.6-.01 2.89-.01 3.29 0 .31.21.66.8.55A10.99 10.99 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/muhammad-binmushtaq/" target="_blank" aria-label="LinkedIn">
+                        <!-- LinkedIn SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#0077b5"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.77 2.65 4.77 6.1V24h-4v-7.8c0-1.86-.03-4.26-2.6-4.26-2.6 0-3 2.03-3 4.12V24h-4V8z" />
+                        </svg>
+                    </a>
+
+                    <a class="nav-link " href="https://muhammadcode.netlify.app/" target="_blank" aria-label="Website">
+
+                        <!-- Website SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#333" viewBox="0 0 24 24">
+                            <path d="M3 4a2 2 0 0 0-2 2v12a2 
+                 2 0 0 0 2 2h18a2 2 0 0 0 
+                 2-2V6a2 2 0 0 0-2-2H3zm0 
+                 2h18v2H3V6zm0 4h18v8H3v-8z" />
+                            <circle cx="6" cy="7" r="1" fill="#333" />
+                            <circle cx="9" cy="7" r="1" fill="#333" />
+                            <circle cx="12" cy="7" r="1" fill="#333" />
+                        </svg>
+                    </a>
+
+                </div>
+            </div>
+
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Related Articles</h3>
+                <ul class="related-list">
+                    <li>
+                        <a href="#">
+                            <span class="icon">🎧</span> Why Podcasts Are the New Radio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon">🕶️</span> Immersive VR Storytelling
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon">📖</span> The Rise of Interactive Fiction
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon">🤖</span> AI and the Future of Creativity
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+    </main>
+
+
+    <!-- ARTICLE NAVIGATION -->
+    <section class="article-nav container">
+        <div class="nav-item">← The Rise of Visual Essays</div>
+        <div class="nav-item">Virtual Reality in Education →</div>
+    </section>
+
+    <!-- BACK TO TOP -->
+    <a href="#" class="back-to-top">↑</a>
+</body>
+
+</html>
